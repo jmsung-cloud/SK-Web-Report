@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SK Inc. Sustainability 2026 | 전문 지속가능경영보고</title>
+    <!-- Pretendard Font -->
+    <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css" />
+    <style>
+        :root {
+            /* SK Brand Colors */
+            --sk-red: #E61E2B;
+            --sk-orange: #F47920;
+            --sk-gradient: linear-gradient(135deg, #E61E2B 0%, #F47920 100%);
+            --sk-red-soft: rgba(230, 30, 43, 0.05);
+            
+            /* Neutrals */
+            --bg-primary: #ffffff;
+            --bg-secondary: #f9fafb;
+            --text-main: #111827;
+            --text-muted: #6b7280;
+            --border-light: #f1f5f9;
+            --border-medium: #e2e8f0;
+            
+            /* System */
+            --transition-base: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-focus: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+            --container-max: 1280px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-font-smoothing: antialiased; }
+        body {
+            font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+            word-break: keep-all;
+        }
+
+        /* --- Common Styles --- */
+        .container { max-width: var(--container-max); margin: 0 auto; padding: 0 5%; }
+        .section-padding { padding: 120px 0; }
+        .reveal { opacity: 0; transform: translateY(40px); transition: var(--transition-base); }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+        
+        .tag { 
+            display: inline-block; padding: 6px 16px; border-radius: 100px; 
+            background: var(--sk-red-soft); color: var(--sk-red); 
+            font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; margin-bottom: 24px;
+            border: 1px solid rgba(230, 30, 43, 0.1);
+        }
+
+        /* --- Header --- */
+        header {
+            position: fixed; top: 0; width: 100%; height: 80px;
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 0 5%; background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(20px); z-index: 1000;
+            border-bottom: 1px solid var(--border-light);
+        }
+        .logo-container img { height: 32px; width: auto; }
+        .nav-menu { display: flex; gap: 32px; }
+        .nav-menu a { 
+            text-decoration: none; color: var(--text-main); 
+            font-size: 0.95rem; font-weight: 600; transition: 0.3s; 
+            position: relative; padding: 10px 0;
+        }
+        .nav-menu a::after { 
+            content: ''; position: absolute; bottom: 0; left: 0; width: 0; 
+            height: 2px; background: var(--sk-red); transition: 0.3s; 
+        }
+        .nav-menu a:hover { color: var(--sk-red); }
+        .nav-menu a:hover::after { width: 100%; }
+
+        /* --- Hero Section --- */
+        .hero {
+            position: relative; height: 100vh; min-height: 800px;
+            display: flex; align-items: center; overflow: hidden;
+        }
+        .hero-bg {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;
+            background-image: url('https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&q=80&w=2560');
+            background-size: cover; background-position: center;
+            filter: blur(2px) brightness(0.9); transform: scale(1.05);
+        }
+        .hero-overlay {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0;
+            background: linear-gradient(to bottom, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0.9) 100%);
+        }
+
+        .hero-content { position: relative; z-index: 10; max-width: 900px; }
+        .hero h1 { 
+            font-size: clamp(3rem, 8vw, 5.5rem); font-weight: 900; line-height: 1.05; 
+            letter-spacing: -0.04em; margin-bottom: 32px; color: var(--text-main);
+            text-shadow: 0 4px 20px rgba(255,255,255,0.5);
+        }
+        .hero h1 span.accent { 
+            background: var(--sk-gradient); -webkit-background-clip: text; 
+            -webkit-text-fill-color: transparent;
+        }
+        .hero p { font-size: 1.35rem; color: var(--text-main); font-weight: 600; max-width: 700px; line-height: 1.5; }
+
+        /* --- Quick Actions --- */
+        .quick-actions { 
+            display: grid; grid-template-columns: repeat(4, 1fr); 
+            background: #fff; margin-top: -60px; position: relative; z-index: 10;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.08); border-radius: 20px; overflow: hidden;
+        }
+        .quick-item { 
+            padding: 40px 20px; display: flex; flex-direction: column; align-items: center; 
+            gap: 16px; text-decoration: none; color: var(--text-main); font-weight: 700; 
+            font-size: 0.9rem; border-right: 1px solid var(--border-light); transition: var(--transition-base);
+        }
+        .quick-item:last-child { border-right: none; }
+        .quick-item:hover { background: var(--bg-secondary); transform: translateY(-5px); color: var(--sk-red); }
+        .quick-item svg { width: 28px; height: 28px; stroke-width: 1.5; }
+
+        /* --- Story Section --- */
+        .story-grid { display: grid; grid-template-columns: 1fr 1.5fr; gap: 80px; align-items: start; }
+        .story-sticky { position: sticky; top: 140px; }
+        .story-sticky h2 { font-size: 3.5rem; font-weight: 900; letter-spacing: -0.04em; line-height: 1.1; margin-bottom: 24px; }
+        .story-card-container { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
+        .story-card { 
+            background: var(--bg-secondary); padding: 48px 32px; border-radius: 24px; 
+            transition: var(--transition-base); border: 1px solid transparent;
+        }
+        .story-card:hover { 
+            background: #fff; border-color: var(--sk-red); 
+            box-shadow: 0 20px 40px rgba(230, 30, 43, 0.04); transform: translateY(-10px);
+        }
+        .story-num { font-size: 1rem; font-weight: 800; color: var(--sk-red); opacity: 0.3; margin-bottom: 32px; display: block; }
+        .story-card h4 { font-size: 1.25rem; font-weight: 800; margin-bottom: 16px; }
+        .story-card p { font-size: 0.95rem; color: var(--text-muted); font-weight: 500; }
+
+        /* --- Strategy & DBL --- */
+        .strategy-bg { background-color: var(--bg-secondary); border-radius: 60px; padding: 100px 0; margin: 0 2%; }
+        .strategy-header { text-align: center; margin-bottom: 80px; }
+        .strategy-header h2 { font-size: 3rem; font-weight: 900; }
+        
+        .vision-display {
+            background: #fff; padding: 50px; border-radius: 40px; box-shadow: 0 20px 40px rgba(0,0,0,0.03);
+            text-align: center; max-width: 850px; margin: 0 auto 60px; position: relative;
+        }
+        .vision-display .label { font-size: 0.8rem; font-weight: 800; color: var(--text-muted); letter-spacing: 0.2em; margin-bottom: 12px; display: block; }
+        .vision-display .content { font-size: 1.85rem; font-weight: 900; background: var(--sk-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+
+        .dbl-flow { display: flex; align-items: center; justify-content: center; gap: 30px; margin-top: 80px; }
+        .dbl-node { 
+            background: #fff; padding: 30px; border-radius: 30px; width: 220px; height: 220px;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.02); border: 1px solid var(--border-medium);
+        }
+        .node-main { 
+            width: 260px; height: 260px; border: 2px solid var(--sk-red); position: relative;
+            background: var(--bg-primary); z-index: 2;
+        }
+        .node-main::before {
+            content: ''; position: absolute; width: 110%; height: 110%; border: 1px dashed var(--sk-red);
+            border-radius: 50%; animation: rotate 20s linear infinite;
+        }
+        @keyframes rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+        
+        .dbl-node h5 { font-size: 1.1rem; font-weight: 800; margin-bottom: 8px; }
+        .dbl-node .sub { font-size: 0.75rem; color: var(--text-muted); font-weight: 600; text-transform: uppercase; }
+
+        /* --- Materiality --- */
+        .material-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 40px; }
+        .material-card { 
+            border: 1px solid var(--border-medium); border-radius: 32px; padding: 50px;
+            transition: var(--transition-base);
+        }
+        .material-card:hover { border-color: var(--sk-red); background: var(--sk-red-soft); }
+        .material-card h3 { font-size: 2rem; font-weight: 900; margin-bottom: 40px; display: flex; justify-content: space-between; }
+        .material-list { list-style: none; }
+        .material-item { 
+            display: flex; align-items: center; padding: 20px 0; border-bottom: 1px solid var(--border-light);
+            gap: 20px;
+        }
+        .m-badge { 
+            width: 32px; height: 32px; border-radius: 8px; display: flex; align-items: center; justify-content: center;
+            color: #fff; font-weight: 800; font-size: 0.75rem;
+        }
+        .m-text { font-size: 1rem; font-weight: 700; color: var(--text-main); }
+        .m-num { color: var(--border-medium); font-weight: 900; font-size: 1.1rem; width: 24px; }
+
+        /* --- Focus Areas (Updated Interaction) --- */
+        .focus-section { padding: 120px 0; background: #fff; }
+        .focus-row { 
+            display: flex; width: 100%; height: 650px; overflow: hidden; 
+            border-radius: 40px; background: var(--border-light);
+        }
+        .focus-box { 
+            flex: 1; position: relative; overflow: hidden; text-decoration: none; color: #fff;
+            transition: var(--transition-focus); border-right: 1px solid rgba(255,255,255,0.1);
+        }
+        .focus-box:last-child { border-right: none; }
+        
+        /* Hover Effect: Expands to double width */
+        .focus-row:hover .focus-box { flex: 0.7; filter: brightness(0.7); }
+        .focus-row .focus-box:hover { flex: 2; filter: brightness(1); }
+
+        .focus-img { 
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%; 
+            object-fit: cover; transition: var(--transition-focus); z-index: 1; 
+            filter: brightness(0.6); 
+        }
+        .focus-box:hover .focus-img { transform: scale(1.05); }
+
+        /* Centered Content */
+        .focus-content { 
+            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); 
+            width: 80%; text-align: center; z-index: 2; transition: var(--transition-focus);
+        }
+        .focus-content h4 { 
+            font-size: 2.8rem; font-weight: 900; margin-bottom: 24px; 
+            letter-spacing: -0.02em; text-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        }
+        .focus-content p { 
+            font-size: 1.25rem; line-height: 1.6; font-weight: 600; opacity: 0; 
+            transform: translateY(30px); transition: var(--transition-focus); 
+            max-width: 500px; margin: 0 auto;
+            text-shadow: 0 2px 5px rgba(0,0,0,0.5);
+        }
+        .focus-box:hover .focus-content p { opacity: 1; transform: translateY(0); }
+        /* Title remains centered but might move slightly up on hover for space */
+        .focus-box:hover .focus-content { transform: translate(-50%, -55%); }
+
+        /* --- KPI Section --- */
+        .kpi-container { display: grid; grid-template-columns: repeat(3, 1fr); gap: 80px; }
+        .kpi-val { font-size: 5rem; font-weight: 900; letter-spacing: -0.05em; line-height: 1; margin-bottom: 20px; color: var(--text-main); }
+        .kpi-bar-wrap { width: 100%; height: 4px; background: var(--border-light); margin-bottom: 24px; border-radius: 2px; }
+        .kpi-bar { height: 100%; background: var(--sk-red); width: 0; transition: 1.5s cubic-bezier(0.19, 1, 0.22, 1); }
+
+        /* --- Footer Sitemap (Restored) --- */
+        .footer-sitemap { background-color: #fafbfc; padding: 100px 5% 60px 5%; border-top: 1px solid var(--border-medium); }
+        .sitemap-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 40px; max-width: 1400px; margin: 0 auto; }
+        .sitemap-col h4 { font-size: 1rem; font-weight: 900; color: var(--text-main); margin-bottom: 28px; }
+        .sitemap-list { list-style: none; }
+        .sitemap-list li { margin-bottom: 12px; }
+        .sitemap-list a { text-decoration: none; color: var(--text-muted); font-size: 0.85rem; font-weight: 500; transition: 0.2s; }
+        .sitemap-list a:hover { color: var(--sk-red); }
+
+        .footer-branding { background-color: #ffffff; padding: 40px 5%; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border-light); }
+        .brand-left { display: flex; flex-direction: column; gap: 8px; }
+        .brand-left img { height: 32px; width: auto; object-fit: contain; filter: grayscale(1); opacity: 0.6; }
+        .copyright { font-size: 0.8rem; color: var(--text-muted); font-weight: 500; }
+        .brand-right { display: flex; gap: 32px; align-items: center; }
+        .brand-right a { text-decoration: none; color: var(--text-main); font-size: 0.85rem; font-weight: 700; }
+
+        @media (max-width: 1024px) {
+            .story-grid, .material-grid, .kpi-container, .sitemap-grid { grid-template-columns: 1fr; }
+            .focus-row { flex-direction: column; height: auto; border-radius: 20px; }
+            .focus-box { height: 300px; border-right: none; border-bottom: 1px solid rgba(255,255,255,0.1); }
+            .focus-row:hover .focus-box { flex: 1; }
+            .focus-row .focus-box:hover { flex: 1; }
+            .focus-content h4 { font-size: 2rem; }
+            .dbl-flow { flex-direction: column; }
+            .nav-menu { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="logo-container">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/e/e0/SK_Logo.svg" alt="SK Logo">
+    </div>
+    <nav class="nav-menu">
+        <a href="#story">ESG Story</a>
+        <a href="#strategy">Strategy</a>
+        <a href="#materiality">Materiality</a>
+        <a href="#focus">Focus Areas</a>
+        <a href="#appendix">Appendix</a>
+    </nav>
+</header>
+
+<main>
+    <!-- HERO -->
+    <section class="hero">
+        <div class="hero-bg"></div>
+        <div class="hero-overlay"></div>
+        <div class="container">
+            <div class="hero-content">
+                <span class="tag reveal">SUSTAINABILITY REPORT 2026</span>
+                <h1 class="reveal">Sustainable <br><span class="accent">Innovation</span>, <br>Digital Future.</h1>
+                <p class="reveal">SK주식회사는 인공지능과 디지털 기술의 혁신을 통해 인류의 행복을 키우고, 지속 가능한 지구의 내일을 선도합니다.</p>
+            </div>
+        </div>
+    </section>
+
+    <div class="container">
+        <section class="quick-actions reveal">
+            <a href="#" class="quick-item">
+                <svg fill="none" viewBox="0 0 24 24" stroke="var(--sk-red)"><path d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M9 19l3 3m0 0l3-3m-3 3V10" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                보고서 다운로드
+            </a>
+            <a href="#" class="quick-item">
+                <svg fill="none" viewBox="0 0 24 24" stroke="var(--text-main)"><path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                ESG Data 센터
+            </a>
+            <a href="#" class="quick-item">
+                <svg fill="none" viewBox="0 0 24 24" stroke="var(--text-main)"><path d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                주요 정책 및 원칙
+            </a>
+            <a href="#" class="quick-item">
+                <svg fill="none" viewBox="0 0 24 24" stroke="var(--text-main)"><path d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                GRI/SASB 인덱스
+            </a>
+        </section>
+    </div>
+
+    <!-- STORY -->
+    <section id="story" class="section-padding">
+        <div class="container">
+            <div class="story-grid">
+                <div class="story-sticky reveal">
+                    <span class="tag">SK ESG STORY</span>
+                    <h2>SK가 만드는<br>내일의 행복</h2>
+                    <p>투명한 경영과 기술적 혁신으로<br>지속가능한 생태계를 구축합니다.</p>
+                </div>
+                <div class="story-card-container">
+                    <div class="story-card reveal">
+                        <span class="story-num">01</span>
+                        <h4>CEO Letter</h4>
+                        <p>CEO와 이해관계자가 함께 나누는 지속가능한 미래에 대한 약속을 담았습니다.</p>
+                    </div>
+                    <div class="story-card reveal" style="transition-delay: 0.1s;">
+                        <span class="story-num">02</span>
+                        <h4>SK Double Bottom Line</h4>
+                        <p>경제적 가치와 사회적 가치를 동시에 추구하는 SK 고유의 경영 모델을 실천합니다.</p>
+                    </div>
+                    <div class="story-card reveal" style="transition-delay: 0.2s;">
+                        <span class="story-num">03</span>
+                        <h4>Value Creation Story</h4>
+                        <p>디지털 기술 혁신을 통해 창출되는 미래 가치 창출 스토리를 설명합니다.</p>
+                    </div>
+                    <div class="story-card reveal" style="transition-delay: 0.3s;">
+                        <span class="story-num">04</span>
+                        <h4>ESG Key Metrics</h4>
+                        <p>정량화된 고품질 데이터를 기반으로 투명하게 공개되는 성과 지표입니다.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- STRATEGY -->
+    <section id="strategy" class="section-padding strategy-bg reveal">
+        <div class="container">
+            <div class="strategy-header">
+                <span class="tag">ESG STRATEGY</span>
+                <h2>ESG 추진 전략 및 비전</h2>
+            </div>
+            <div class="vision-display reveal">
+                <span class="label">OUR VISION</span>
+                <span class="content">Global Leading AI Company for Sustainable Future</span>
+            </div>
+            
+            <div class="dbl-flow reveal">
+                <div class="dbl-node">
+                    <h5>Economic Value</h5>
+                    <span class="sub">경제적 가치</span>
+                </div>
+                <svg width="60" height="20" viewBox="0 0 60 20"><path d="M0 10H58" stroke="#e2e8f0" stroke-width="2" stroke-dasharray="4 4"/></svg>
+                <div class="dbl-node node-main">
+                    <span class="sub" style="color: var(--sk-red)">Management Philosophy</span>
+                    <h5 style="font-size: 1.5rem; margin-top: 10px;">DBL 추구</h5>
+                </div>
+                <svg width="60" height="20" viewBox="0 0 60 20"><path d="M0 10H58" stroke="#e2e8f0" stroke-width="2" stroke-dasharray="4 4"/></svg>
+                <div class="dbl-node">
+                    <h5>Social Value</h5>
+                    <span class="sub">사회적 가치</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MATERIALITY (Updated Title) -->
+    <section id="materiality" class="section-padding">
+        <div class="container">
+            <div class="strategy-header" style="text-align: left;">
+                <span class="tag">MATERIALITY ASSESSMENT</span>
+                <h2>핵심 중요 주제</h2>
+            </div>
+            <div class="material-grid">
+                <!-- Impact (영향 중요성) -->
+                <div class="material-card reveal">
+                    <h3>Impact</h3>
+                    <ul class="material-list">
+                        <li class="material-item">
+                            <span class="m-num">01</span>
+                            <div class="m-badge" style="background: #10b981">E</div>
+                            <span class="m-text">기후변화 대응 및 저탄소 전략</span>
+                        </li>
+                        <li class="material-item">
+                            <span class="m-num">02</span>
+                            <div class="m-badge" style="background: var(--sk-red)">G</div>
+                            <span class="m-text">윤리 및 투명 경영 체계</span>
+                        </li>
+                        <li class="material-item">
+                            <span class="m-num">03</span>
+                            <div class="m-badge" style="background: #3b82f6">S</div>
+                            <span class="m-text">인재 양성 및 다양성 존중</span>
+                        </li>
+                        <li class="material-item">
+                            <span class="m-num">04</span>
+                            <div class="m-badge" style="background: #ef4444">S</div>
+                            <span class="m-text">정보보안 및 개인정보 보호</span>
+                        </li>
+                        <li class="material-item">
+                            <span class="m-num">05</span>
+                            <div class="m-badge" style="background: #f59e0b">S</div>
+                            <span class="m-text">지역사회 상생 및 사회공헌</span>
+                        </li>
+                    </ul>
+                </div>
+                <!-- Financial (재무 중요성) -->
+                <div class="material-card reveal" style="transition-delay: 0.1s;">
+                    <h3>Financial</h3>
+                    <ul class="material-list">
+                        <li class="material-item">
+                            <span class="m-num">01</span>
+                            <div class="m-badge" style="background: #3b82f6">S</div>
+                            <span class="m-text">서비스 안정성 및 기술 혁신</span>
+                        </li>
+                        <li class="material-item">
+                            <span class="m-num">02</span>
+                            <div class="m-badge" style="background: #10b981">E</div>
+                            <span class="m-text">친환경 에너지 포트폴리오</span>
+                        </li>
+                        <li class="material-item">
+                            <span class="m-num">03</span>
+                            <div class="m-badge" style="background: var(--sk-orange)">G</div>
+                            <span class="m-text">주주 가치 제고 정책</span>
+                        </li>
+                        <li class="material-item">
+                            <span class="m-num">04</span>
+                            <div class="m-badge" style="background: #8b5cf6">G</div>
+                            <span class="m-text">전사 리스크 관리 시스템</span>
+                        </li>
+                        <li class="material-item">
+                            <span class="m-num">05</span>
+                            <div class="m-badge" style="background: #14b8a6">E</div>
+                            <span class="m-text">공급망 지속가능성 관리</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOCUS AREAS (Updated Layout & Interaction) -->
+    <section id="focus" class="focus-section">
+        <div class="container">
+            <div class="strategy-header" style="text-align: left;">
+                <span class="tag">FOCUS AREAS</span>
+                <h2>ESG 경영 실천 영역</h2>
+            </div>
+            <div class="focus-row reveal">
+                <a href="#" class="focus-box">
+                    <img src="https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?auto=format&fit=crop&q=80&w=1200" class="focus-img" alt="Environmental">
+                    <div class="focus-content">
+                        <h4>Environmental</h4>
+                        <p>탄소 감축 실천과 친환경 비즈니스 확대를 통해 지속가능한 미래를 선도합니다.</p>
+                    </div>
+                </a>
+                <a href="#" class="focus-box">
+                    <img src="https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&q=80&w=1200" class="focus-img" alt="Social">
+                    <div class="focus-content">
+                        <h4>Social</h4>
+                        <p>이해관계자의 행복을 최우선으로, 상생의 사회적 가치를 창출합니다.</p>
+                    </div>
+                </a>
+                <a href="#" class="focus-box">
+                    <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80&w=1200" class="focus-img" alt="Governance">
+                    <div class="focus-content">
+                        <h4>Governance</h4>
+                        <p>투명하고 공정한 지배구조를 통해 기업의 신뢰를 다집니다.</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- KPI -->
+    <section class="section-padding reveal">
+        <div class="container">
+            <div class="kpi-container">
+                <div class="kpi-card">
+                    <span class="tag">NET ZERO 2040</span>
+                    <div class="kpi-val" data-target="182034">0</div>
+                    <div class="kpi-bar-wrap"><div class="kpi-bar" data-width="75"></div></div>
+                    <p style="font-size: 0.95rem; color: var(--text-muted)">탄소 배출량 감축 성과 (tCO2eq)</p>
+                </div>
+                <div class="kpi-card">
+                    <span class="tag">SOCIAL VALUE</span>
+                    <div class="kpi-val" data-target="57.9" data-decimal="1">0</div>
+                    <div class="kpi-bar-wrap"><div class="kpi-bar" data-width="52"></div></div>
+                    <p style="font-size: 0.95rem; color: var(--text-muted)">사회적 가치 측정 총액 (조원)</p>
+                </div>
+                <div class="kpi-card">
+                    <span class="tag">AI BUSINESS</span>
+                    <div class="kpi-val" data-target="3820">0</div>
+                    <div class="kpi-bar-wrap"><div class="kpi-bar" data-width="84"></div></div>
+                    <p style="font-size: 0.95rem; color: var(--text-muted)">디지털 신사업 매출 성과 (십억원)</p>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<!-- SITEMAP FOOTER (Restored to original structure) -->
+<footer>
+    <div class="footer-sitemap">
+        <div class="sitemap-grid">
+            <div class="sitemap-col">
+                <h4>SK ESG Story</h4>
+                <ul class="sitemap-list">
+                    <li><a href="#">ESG Letter</a></li>
+                    <li><a href="#">SK Double Bottom Line</a></li>
+                    <li><a href="#">Value Creation Story</a></li>
+                    <li><a href="#">ESG Key Metrics</a></li>
+                </ul>
+            </div>
+            <div class="sitemap-col">
+                <h4>Materiality</h4>
+                <ul class="sitemap-list">
+                    <li><a href="#">이해관계자 참여</a></li>
+                    <li><a href="#">이중 중요성 평가</a></li>
+                    <li><a href="#">영향 중요주제</a></li>
+                    <li><a href="#">재무 중요주제</a></li>
+                </ul>
+            </div>
+            <div class="sitemap-col">
+                <h4>Environmental</h4>
+                <ul class="sitemap-list">
+                    <li><a href="#">기후변화 대응(TCFD)</a></li>
+                    <li><a href="#">청정기술/사업 투자</a></li>
+                    <li><a href="#">환경영향 관리</a></li>
+                </ul>
+            </div>
+            <div class="sitemap-col">
+                <h4>Social</h4>
+                <ul class="sitemap-list">
+                    <li><a href="#">인권 경영</a></li>
+                    <li><a href="#">인재 경영</a></li>
+                    <li><a href="#">안전 및 보건</a></li>
+                    <li><a href="#">공급망 관리</a></li>
+                    <li><a href="#">정보보안</a></li>
+                    <li><a href="#">서비스 품질 및 안정성</a></li>
+                    <li><a href="#">사회공헌</a></li>
+                </ul>
+            </div>
+            <div class="sitemap-col">
+                <h4>Governance</h4>
+                <ul class="sitemap-list">
+                    <li><a href="#">지배구조</a></li>
+                    <li><a href="#">윤리 및 컴플라이언스</a></li>
+                    <li><a href="#">리스크 관리</a></li>
+                </ul>
+            </div>
+            <div class="sitemap-col">
+                <h4>Appendix</h4>
+                <ul class="sitemap-list">
+                    <li><a href="#">ESG Data</a></li>
+                    <li><a href="#">Policy & Principle</a></li>
+                    <li><a href="#">글로벌 이니셔티브</a></li>
+                    <li><a href="#">수상, 인증 및 협회활동</a></li>
+                    <li><a href="#">GRI/SASB/TCFD Index</a></li>
+                    <li><a href="#">Assurance</a></li>
+                    <li><a href="#">About this Report</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="footer-branding">
+        <div class="brand-left">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/e/e0/SK_Logo.svg" alt="SK Logo">
+            <p class="copyright">© 2026 SK Inc. ALL RIGHTS RESERVED.</p>
+        </div>
+        <div class="brand-right">
+            <a href="#">개인정보 처리방침</a>
+            <a href="#">윤리경영 상담/제보</a>
+            <div style="margin-left: 20px; color: var(--text-muted); cursor: pointer;" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">TOP ↑</div>
+        </div>
+    </div>
+</footer>
+
+<script>
+    const observerOptions = { threshold: 0.1, rootMargin: "0px 0px -50px 0px" };
+    const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('active');
+                
+                const counters = entry.target.querySelectorAll('.kpi-val');
+                counters.forEach(counter => {
+                    if (!counter.dataset.counted) startCounter(counter);
+                });
+
+                const bars = entry.target.querySelectorAll('.kpi-bar');
+                bars.forEach(bar => {
+                    bar.style.width = bar.dataset.width + '%';
+                });
+            }
+        });
+    }, observerOptions);
+
+    document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+    function startCounter(el) {
+        const target = parseFloat(el.dataset.target);
+        const decimal = parseInt(el.dataset.decimal || 0);
+        const duration = 2000; 
+        const startTime = performance.now();
+        el.dataset.counted = "true";
+
+        function updateCount(currentTime) {
+            const elapsed = currentTime - startTime;
+            const progress = Math.min(elapsed / duration, 1);
+            const easeProgress = 1 - Math.pow(1 - progress, 3);
+            const currentValue = progress === 1 ? target : (target * easeProgress);
+            
+            if (decimal > 0) {
+                el.innerText = currentValue.toFixed(decimal);
+            } else {
+                el.innerText = Math.floor(currentValue).toLocaleString();
+            }
+
+            if (progress < 1) {
+                requestAnimationFrame(updateCount);
+            } else {
+                el.innerText = decimal > 0 ? target.toFixed(decimal) : Math.floor(target).toLocaleString();
+            }
+        }
+        requestAnimationFrame(updateCount);
+    }
+</script>
+</body>
+</html>
